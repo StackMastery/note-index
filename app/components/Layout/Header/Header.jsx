@@ -1,7 +1,10 @@
 import Link from "next/link";
 import SignIn from "./SignIn";
+import { auth } from "@/auth";
+import ProfileAvatar from "./ProfileAvatar";
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
   return (
     <>
       <header className="flex justify-center px-5 w-full fixed">
@@ -9,8 +12,16 @@ export default function Header() {
           <Link href={`/`} className="text-3xl">
             Note <span className="text-sky-600">Index</span>
           </Link>
-          <div>
-            <SignIn />
+          <div className="flex items-center gap-5">
+            {!session?.user ? (
+              <>
+                <SignIn />
+              </>
+            ) : (
+              <>
+                <ProfileAvatar user={session.user} />
+              </>
+            )}
           </div>
         </div>
       </header>

@@ -5,12 +5,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { TfiClose } from "react-icons/tfi";
+import { GithubSignIn, GoogleSignIn } from "@/app/actions/auth.actions";
 
 export default function SignIn() {
   const [popopOpen, setpopopOpen] = useState(false);
 
   return (
-    <>
+    <div>
       <button
         onClick={() => setpopopOpen(!popopOpen)}
         className="flex bg-gradient-to-br from-sky-700 to-sky-600 px-5 py-2 rounded-xl border border-sky-500 hover:border-sky-400"
@@ -36,11 +37,17 @@ export default function SignIn() {
                 </div>
                 <span className="!bg-slate-600 h-[1px] w-full flex" />
                 <div className="space-y-2">
-                  <button className="px-5 flex hover:bg-white/80 gap-10 items-center py-2 rounded-md bg-white w-full text-black">
+                  <button
+                    onClick={GoogleSignIn}
+                    className="px-5 flex hover:bg-white/80 gap-10 items-center py-2 rounded-md bg-white w-full text-black"
+                  >
                     <FcGoogle size={23} />
                     Continue with Google
                   </button>
-                  <button className="px-5 flex gap-10 hover:bg-black/60 items-center py-2 rounded-md bg-black w-full text-white border border-white/20">
+                  <button
+                    onClick={GithubSignIn}
+                    className="px-5 flex gap-10 hover:bg-black/60 items-center py-2 rounded-md bg-black w-full text-white border border-white/20"
+                  >
                     <FaGithub size={23} />
                     Continue with Github
                   </button>
@@ -50,6 +57,6 @@ export default function SignIn() {
           </>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
