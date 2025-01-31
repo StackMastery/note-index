@@ -1,3 +1,4 @@
+import Link from "next/link";
 import LayoutSwitch from "./LayoutSwitch";
 import Search from "./Search";
 
@@ -10,9 +11,12 @@ export default function Dashboard() {
             <Search />
             <div className="w-full md:w-96 -translate-y-2 flex gap-5">
               <LayoutSwitch />
-              <button className="w-full items-center bg-white border border-stone-200 px-5 rounded-md py-[5px] text-black">
+              <Link
+                href={`/new`}
+                className="w-full items-center bg-white border text-center border-stone-200 !font-semibold px-5 rounded-md py-[5px] text-black hover:bg-stone-300"
+              >
                 Share New
-              </button>
+              </Link>
             </div>
           </div>
         </div>
