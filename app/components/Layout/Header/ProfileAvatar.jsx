@@ -19,7 +19,7 @@ export default function ProfileAvatar(user) {
             <AvatarFallback>{user?.user?.name?.slice(0, 1)}</AvatarFallback>
           </Avatar>
         </PopoverTrigger>
-        <PopoverContent className="bg-slate-800 font-thin text-slate-400 space-y-3 border-slate-600 mt-7 mr-5">
+        <PopoverContent className="bg-slate-800 shadow-2xl shadow-sky-600 font-thin text-slate-400 space-y-3 border-sky-600 mt-7 mr-5">
           <div className="font-thin  flex justify-between items-center">
             Profile -
           </div>

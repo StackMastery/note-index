@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./components/Layout/Header/Header";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { auth } from "@/auth";
+import { AppContextProvider } from "./content/AppContext";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -23,9 +24,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${spaceGrotesk.className} antialiased bg-slate-950/90 text-white`}
       >
-        <ScrollProgress />
-        <Header />
-        {children}
+        <AppContextProvider>
+          <ScrollProgress />
+          <Header />
+          {children}
+        </AppContextProvider>
       </body>
     </html>
   );
