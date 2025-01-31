@@ -33,7 +33,7 @@ export default function Hero() {
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             className="font-thin"
           >
             Note Index is an online collaborative code editor for technical

@@ -1,9 +1,19 @@
+import { auth } from "@/auth";
 import Hero from "./components/pages/Home/Hero";
+import Dashboard from "./components/pages/Dashboard/Dashboard";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
   return (
     <>
-      <Hero />
+      {!session?.user ? (
+        <>
+          <Hero />
+        </>
+      ) : (
+        <Dashboard />
+      )}
     </>
   );
 }
