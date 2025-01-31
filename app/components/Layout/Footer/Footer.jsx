@@ -16,6 +16,7 @@ export default function Footer() {
               {SocialMedia &&
                 SocialMedia.map((social, index) => (
                   <Link
+                    key={`socia-key-${index}`}
                     href={social?.path}
                     className="flex items-center gap-2 text-slate-300 px-3 hover:bg-slate-700 transition-all py-1 rounded-md"
                   >
