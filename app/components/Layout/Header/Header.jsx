@@ -7,8 +7,8 @@ export default async function Header() {
   const session = await auth();
   return (
     <>
-      <header className="flex justify-center px-5 w-full fixed">
-        <div className="inline-flex items-center max-w-primary justify-between p-5 py-3 border w-full border-slate-600 rounded-md bg-slate-800 my-5">
+      <header className="flex justify-center px-5 w-full fixed z-[9999999]">
+        <div className="inline-flex items-center max-w-primary justify-between p-5 py-3 border w-full border-slate-700 rounded-xl h-16 bg-slate-800 my-5">
           <Link href={`/`} className="text-3xl">
             Note <span className="text-sky-600">Index</span>
           </Link>

@@ -10,3 +10,7 @@
 html {
   overflow-y: scroll;
 }
+
+* {
+  outline: none !important;
+}
