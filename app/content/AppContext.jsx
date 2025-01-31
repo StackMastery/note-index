@@ -1,20 +1,19 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const StoredLayout = localStorage.getItem("layout") || "grid";
-  const [layoutIsGrid, setlayoutIsGrid] = useState(StoredLayout);
+  const [layoutIsGrid, setlayoutIsGrid] = useState("");
+
+  useEffect(() => {
+    const storedLayout = localStorage.getItem("layout") || "grid";
+    setlayoutIsGrid(storedLayout);
+  }, []);
 
   return (
-    <AppContext.Provider
-      value={{
-        layoutIsGrid,
-        setlayoutIsGrid,
-      }}
-    >
+    <AppContext.Provider value={{ layoutIsGrid, setlayoutIsGrid }}>
       {children}
     </AppContext.Provider>
   );
