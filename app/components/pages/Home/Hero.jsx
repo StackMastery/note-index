@@ -5,6 +5,7 @@ import LineBreack from "../../ui/LineBreack";
 import Video from "./Video";
 import { Particles } from "@/components/ui/particles";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -41,16 +42,18 @@ export default function Hero() {
             <LineBreack /> teaching, and more, enhancing real-time teamwork and
             communication.
           </motion.p>
-          <motion.button
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none"
-          >
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0284C7_0%,#0369A1_25%,#7DD3FC_50%,#0369A1_75%,#0284C7_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-5 py-1 text-sm font-medium text-white backdrop-blur-3xl bg-sky-800 hover:bg-sky-500 transition-colors">
-              Share Code
-            </span>
-          </motion.button>
+          <Link href={`/new`}>
+            <motion.button
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none"
+            >
+              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0284C7_0%,#0369A1_25%,#7DD3FC_50%,#0369A1_75%,#0284C7_100%)]" />
+              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-5 py-1 text-sm font-medium text-white backdrop-blur-3xl bg-sky-800 hover:bg-sky-500 transition-colors">
+                Share Code
+              </span>
+            </motion.button>
+          </Link>
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}

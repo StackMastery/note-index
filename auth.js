@@ -18,4 +18,7 @@ export const {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
+  pages: {
+    signIn: "/auth/continue",
+  },
 });
