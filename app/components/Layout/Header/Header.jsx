@@ -1,5 +1,4 @@
 import Link from "next/link";
-import SignIn from "./SignIn";
 import { auth } from "@/auth";
 import ProfileAvatar from "./ProfileAvatar";
 
@@ -14,9 +13,11 @@ export default async function Header() {
           </Link>
           <div className="flex items-center gap-5">
             {!session?.user ? (
-              <>
-                <SignIn />
-              </>
+              <Link href={`/auth/continue`}>
+                <button className="flex bg-gradient-to-br from-sky-700 to-sky-600 px-5 py-2 rounded-xl border border-sky-500 hover:border-sky-400">
+                  Sign In
+                </button>
+              </Link>
             ) : (
               <>
                 <ProfileAvatar user={session.user} />
