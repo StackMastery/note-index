@@ -5,6 +5,7 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { auth } from "@/auth";
 import { AppContextProvider } from "./content/AppContext";
 import Footer from "./components/Layout/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
           <Footer />
+          <Toaster />
         </AppContextProvider>
       </body>
     </html>

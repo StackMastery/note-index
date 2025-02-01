@@ -3,7 +3,6 @@ import { ShineBorder } from "@/components/ui/shine-border";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Particles } from "@/components/ui/particles";
-import { motion } from "framer-motion";
 
 export const metadata = {
   title: "Authentication",
@@ -14,10 +13,10 @@ export default function Auth() {
   return (
     <>
       <section className="flex justify-center">
-        <div className="inline-flex justify-center w-full px-5 max-w-primary items-center py-40 md:py-80 xl:h-screen">
+        <div className="inline-flex justify-center w-full px-5 max-w-primary items-center !pt-24 py-40 md:py-80 xl:h-screen">
           <ShineBorder
             color={["#7dd3fc", "#0284c7", "#075985"]}
-            className="p-5 w-full md:w-9/12 xl:w-[400px] bg-slate-900/30"
+            className="p-5 w-full md:w-9/12 xl:w-[400px] bg-slate-900/30 z-[999999] backdrop-blur-xl"
           >
             <div className="text-start w-full">
               <h2 className="text-2xl text-slate-200">Continue with us</h2>

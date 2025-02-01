@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <>
       <section className="flex justify-center">
-        <div className="inline-flex md:text-center flex-col px-5 justify-center gap-5 py-40 xl:py-60 max-w-primary md:items-center">
+        <div className="inline-flex md:text-center flex-col px-5 justify-center gap-5 !pt-24 py-40 xl:py-60 max-w-primary md:items-center">
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { Label } from "@/components/ui/label";
 import {
   FaHtml5,
@@ -26,34 +25,89 @@ import { SiPhp } from "react-icons/si";
 import { DiRuby } from "react-icons/di";
 import { FaGolang } from "react-icons/fa6";
 import { SiJson } from "react-icons/si";
+import { PiUploadSimpleThin } from "react-icons/pi";
+import toast from "react-hot-toast";
 
 export default function ProjectConfig() {
   const [language, setLanguage] = useState("html");
   const editorRef = useRef(null);
+  const [selectedLang, setselectedLang] = useState({
+    value: "html",
+    label: "HTML",
+    icon: <FaHtml5 color="#e34c26" />,
+    ext: ".html",
+  });
   const monaco = useMonaco();
   const [code, setcode] = useState(null);
   const editorInstanceRef = useRef(null);
 
   const languages = [
-    { value: "html", label: "HTML", icon: <FaHtml5 color="#e34c26" /> },
-    { value: "css", label: "CSS", icon: <FaCss3Alt color="#264de4" /> },
+    {
+      value: "html",
+      label: "HTML",
+      icon: <FaHtml5 color="#e34c26" />,
+      ext: ".html",
+    },
+    {
+      value: "css",
+      label: "CSS",
+      icon: <FaCss3Alt color="#264de4" />,
+      ext: ".css",
+    },
     {
       value: "javascript",
       label: "JavaScript",
       icon: <FaJsSquare color="#f7df1e" />,
+      ext: ".js, .jsx",
     },
-    { value: "python", label: "Python", icon: <FaPython color="#306998" /> },
-    { value: "java", label: "Java", icon: <FaJava color="#007396" /> },
-    { value: "go", label: "Go", icon: <FaGolang color="#00ADD8" /> },
-    { value: "ruby", label: "Ruby", icon: <DiRuby color="#701516" /> },
-    { value: "php", label: "PHP", icon: <SiPhp color="#8993be" /> },
-    { value: "json", label: "JSON", icon: <SiJson color="#8C1515" /> },
+    {
+      value: "python",
+      label: "Python",
+      icon: <FaPython color="#306998" />,
+      ext: ".py",
+    },
+    {
+      value: "java",
+      label: "Java",
+      icon: <FaJava color="#007396" />,
+      ext: ".java",
+    },
+    {
+      value: "go",
+      label: "Go",
+      icon: <FaGolang color="#00ADD8" />,
+      ext: ".go",
+    },
+    {
+      value: "ruby",
+      label: "Ruby",
+      icon: <DiRuby color="#701516" />,
+      ext: ".rb",
+    },
+    {
+      value: "php",
+      label: "PHP",
+      icon: <SiPhp color="#8993be" />,
+      ext: ".php",
+    },
+    {
+      value: "json",
+      label: "JSON",
+      icon: <SiJson color="#8C1515" />,
+      ext: ".json",
+    },
     {
       value: "markdown",
       label: "Markdown",
       icon: <BsMarkdown color="#083fa1" />,
+      ext: ".md",
     },
-    { value: "sql", label: "SQL", icon: <FaDatabase color="#F29111" /> },
+    {
+      value: "sql",
+      label: "SQL",
+      icon: <FaDatabase color="#F29111" />,
+      ext: ".sql",
+    },
   ];
 
   useEffect(() => {
@@ -94,7 +148,7 @@ export default function ProjectConfig() {
         editorInstanceRef.current.dispose();
       }
     };
-  }, [monaco]);
+  }, [monaco, code]);
 
   useEffect(() => {
     if (editorInstanceRef.current && monaco) {
@@ -103,6 +157,8 @@ export default function ProjectConfig() {
         monaco.editor.setModelLanguage(model, language);
       }
     }
+    const selectedLanguage = languages.find((a) => a.value === language);
+    setselectedLang(selectedLanguage);
     getCode();
   }, [language, monaco]);
 
@@ -111,6 +167,33 @@ export default function ProjectConfig() {
       const code = editorInstanceRef.current.getValue();
       setcode(code);
     }
+  };
+
+  const handelFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const fileExtArr = file.name.split(".");
+    const fileExtension = fileExtArr[fileExtArr.length - 1].toLowerCase();
+    const allowedExts = selectedLang?.ext
+      .split(",")
+      .map((ext) => ext.trim().replace(".", "").toLowerCase());
+    if (!allowedExts.includes(fileExtension)) {
+      console.log("File extension:", fileExtension);
+      toast.error("Invalid file extension");
+      return;
+    }
+
+    if (file.size > 5242880) {
+      toast.error("File maximum size is 5MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      setcode(e.target.result);
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -132,7 +215,9 @@ export default function ProjectConfig() {
             <div className="w-full space-y-2">
               <Label>File Extention</Label>
               <Select
-                onValueChange={(e) => setLanguage(e)}
+                onValueChange={(e) => {
+                  setLanguage(e);
+                }}
                 defaultValue={language}
               >
                 <SelectTrigger className="w-full">
@@ -158,9 +243,28 @@ export default function ProjectConfig() {
           </div>
         </ShineBorder>
         <div className="w-full xl:w-9/12 border border-slate-700 overflow-hidden rounded-md">
-          <div className="w-full flex justify-between px-5 py-2 border-b bg-slate-800 border-slate-700">
-            <h3 className="uppercase text-slate-300">{language}</h3>
-            <div></div>
+          <div className="w-full items-center flex justify-between px-5 py-2 border-b bg-slate-800 border-slate-700">
+            <h3 className="lowercase text-slate-300">
+              <span className="max-[350px]:hidden capitalize">untitled</span>
+            </h3>
+            <div>
+              <input
+                onChange={handelFileUpload}
+                accept={selectedLang.ext}
+                id="fileUpload"
+                type="file"
+                className="hidden"
+              />
+              <label
+                htmlFor="fileUpload"
+                className="flex gap-3 w-full sm:w-fit cursor-pointer p-1 text-slate-300 bg-slate-700 px-3 rounded-md items-center text-sm"
+              >
+                <PiUploadSimpleThin size={20} />
+                <span className="hidden min-[350px]:block">
+                  Upload {language.toLocaleUpperCase()}
+                </span>
+              </label>
+            </div>
           </div>
           <div
             ref={editorRef}
