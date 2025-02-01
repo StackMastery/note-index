@@ -4,7 +4,7 @@ import { FaFacebookF, FaGithub } from "react-icons/fa";
 export default function Footer() {
   return (
     <>
-      <footer className="flex justify-center w-full border-y  py-10 mt-10 border-slate-700">
+      <footer className="flex backdrop-blur-3xl  z-[9999999999] justify-center w-full border-y  py-10 mt-10 border-slate-700">
         <div className="w-full space-y-5 font-thin max-w-primary px-5">
           <div className="w-full flex justify-between">
             <Link href={`/`} className="text-3xl">
