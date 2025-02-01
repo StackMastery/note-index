@@ -18,12 +18,11 @@ const quickSand = Quicksand({
   display: "swap",
 });
 
-console.log(quickSand.className);
-
 export const generateMetadata = async () => {
   const session = await auth();
   return {
     title: session?.user ? ` ${session?.user?.name} - Dashboard` : "Home",
+    icons: "/favicon.svg",
   };
 };
 
@@ -38,7 +37,11 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
           <Footer />
-          <Toaster />
+          <Toaster
+            toastOptions={{
+              className: "!py-1 !rounded-xl",
+            }}
+          />
         </AppContextProvider>
       </body>
     </html>
