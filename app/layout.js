@@ -1,4 +1,4 @@
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Quicksand } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Layout/Header/Header";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
@@ -11,9 +11,16 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const quickSand = Quicksand({
+  subsets: ["latin"],
+  weight: "300",
+  display: "swap",
+});
+
+console.log(quickSand.className);
+
 export const generateMetadata = async () => {
   const session = await auth();
-
   return {
     title: session?.user ? ` ${session?.user?.name} - Dashboard` : "Home",
   };
